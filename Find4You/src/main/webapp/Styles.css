@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,600;1,200&family=Lobster&display=swap');	
+
+:root{
+	--background-color : rgb(10, 9, 39);
+	--color : white;
+	--background-color2 : rgb(30,30,60);
+	--background-color3 :  rgb(38, 37, 70);
+	--color2 : rgba(138,74,243,1);
+	--border-color :  rgb(10, 9, 39);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+		font-size : 18px;
+		font-family: 'Bitter', serif;
+		box-sizing: border-box;
+		margin : 0;
+		background-image : linear-gradient( to right,var(--background-color),var(--background-color2) ); 
+		/* background-image: linear-gradient( to right,var(--background-color),rgb(220 220 255) ); */
+		color : var(--color);
+		min-height : 100vh; 
+}
+
+
+nav{
+	margin-right : 10px;
+	margin-left : 10px;
+	border-bottom : 2px solid var(--background-color2);
+}
+
+
+#nav-list{
+	display : flex;
+	list-style : none;
+	justify-content : flex-end;	
+}
+
+.nav-link a{
+	display : block;
+	text-decoration : none;
+	color : inherit;
+}
+.nav-link{
+	padding : 5px 10px;
+	margin : 0px 5px;
+	font-size : 1.5rem;
+	color : var(--color);
+	background-color: var(--background-color1);
+}
+
+.active{
+	border : 2px solid var(--color);
+}
+
+.nav-link:first-child{
+	display : block;
+	text-decoration : none;
+	color : inherit;
+	position : absolute;
+	left : 10px;	
+	background-color : transparent; /*var(--background-color);*/
+}
+
+.nav-link:first-child a{
+	font-family: 'Lobster', cursive;
+	
+}
+.nav-link:first-child:not(.link) a{
+	pointer-events: none;
+}
+legend{
+	margin : 10px auto;
+	font-size : 2rem;
+	font-family: 'Lobster', cursive;
+	text-decoration : underline;
+}
+
+form{
+	width: 60vh;
+  	max-width: 500px;
+  	min-width: 300px;
+  	margin: 0 auto;
+}
+label{
+	display : block;
+	font-size : 1.2rem;
+	margin : 5px;
+}
+
+.buttons{
+	display : flex;
+	justify-content : center;
+	align-items : center;	
+}
+
+button{
+	border : none;
+	background-color : var(--background-color2);
+	color : var(--color);
+	font-size : 1.2rem;
+	padding: 5px 10px;
+	margin : 2px 5px;
+	cursor : pointer;
+	font-family: 'Bitter', serif;
+}
+
+.required{
+	color : red;
+}
+input,textarea,select{
+	width: 100%;
+  	margin: 0.5em 0;
+   	min-height: 2em;
+	font-size : 1.2rem;
+	background-color : var(--background-color3) ;
+	color : var(--color);
+	border: 1px solid var(--border-color);
+   	border-radius : 5px;
+   	font-family: 'Bitter', serif;
+   	font-weight : 200;
+   	padding-left: 10px;
+}
+fieldset{
+	border : none;
+}
+fieldset img{
+	display: block;
+    /* width: 50%; */
+    margin-left: auto;
+    margin-right: auto;
+}
+form{
+	border: 2px solid var(--background-color3);
+    padding: 10px;
+    margin-top: 50px;
+}
+h1,h2,h3{
+	width : 100%;
+	margin : 10px auto;
+	text-align : center;
+	font-family: 'Lobster', cursive;
+}
+
+table{
+		width : 70%;
+		min-width : 350px;
+		margin : 30px auto;
+		border : 1px solid var(--background-color2);
+		border-collapse: collapse;
+}
+
+table th {
+  text-align: center;
+  color: var(--background-color2);
+  background-color : var(--color2);
+  padding : 12px 0;
+}
+
+
+table td{
+	 font-weight : 200;
+	 text-align : center;
+	 background-color : var(--background-color2);
+	 padding: 10px 0;
+}
+
+table tr:nth-child(even) td{
+	 font-weight : 200;
+	 text-align : center;
+	 background-color : var(--background-color);
+	 padding: 10px 0;
+}
+table tr:nth-child(odd) td a button{
+	border : 2px solid var(--background-color);
+}
+td a{
+	color : var(--color1);
+}
+
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+figure img{
+  width: 100%;
+  max-width: 350px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+figcaption{
+  width: 100%;
+  max-width: 350px;
+  overflow : hidden;
+}
+
+.message{
+	color : red;
+}
+.red{
+	color : #EF0107;
+}
+.green{
+	color : #17B169;
+}
+
+.border-yelllow{
+	border : 2px solid yellow;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+a figurecaption{
+	
+	color : white;
+	
+}

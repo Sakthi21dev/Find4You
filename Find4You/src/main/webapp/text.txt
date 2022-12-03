@@ -1,0 +1,134 @@
+if("send".equals(rs.getString(6))){
+					PreparedStatement ps2 = con.prepareStatement("Update message set message_status = 'read' where user_Id = ?");
+					ps2.setString(1, email );
+					ps2.executeUpdate();
+				}
+				
+rs.getString(6).equals("read")||
+
+//auto fill color
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+package file;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+
+import java.sql.*;
+import Connection.ConnectionProvider;
+
+@WebServlet(name = "FileUploadServlet", urlPatterns = {"/upload"})
+@MultipartConfig
+public class FileUploadServlet extends HttpServlet {
+   
+	private static final long serialVersionUID = 1L;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		    response.setContentType("text/html;charset=UTF-8");
+
+		    // Create path components to save the file
+		     String path = "../Product";
+		    final Part filePart = request.getPart("file");
+		    final String fileExtension = getExtention(filePart);
+		    final String description = request.getParameter("description");
+		    final String title = request.getParameter("title");
+		    final String mail = request.getParameter("email");
+		    int id = 0;
+		    try {
+				Connection con = ConnectionProvider.getcon();
+				String sql = "Select max(id) from products";
+		        Statement st = con.createStatement();
+		        ResultSet rs = st.executeQuery(sql);
+		        id = 0;
+		        if(rs.next()) {
+		        	id += rs.getInt(1);
+		        }else {
+		        	id = 0;
+		        }
+		        con.close();
+		    }catch(Exception e) {
+		    	System.out.print(e);
+		    }
+		    final String fileName = "product"+id+"."+fileExtension;
+		    
+		   
+		    
+		    
+		    OutputStream out = null;
+		    InputStream filecontent = null;
+		    final PrintWriter writer = response.getWriter();
+
+		    try {
+		        out = new FileOutputStream(new File(path + File.separator
+		                + fileName));
+		        filecontent = filePart.getInputStream();
+
+		        int read = 0;
+		        final byte[] bytes = new byte[1024];
+
+		        while ((read = filecontent.read(bytes)) != -1) {
+		            out.write(bytes, 0, read);
+		       
+		        }
+		        
+		        writer.println("New file " + fileName + " created at " + path);
+		   
+		    } catch (FileNotFoundException fne) {
+		        writer.println("You either did not specify a file to upload or are "
+		                + "trying to upload a file to a protected or nonexistent "
+		                + "location.");
+		        writer.println("<br/> ERROR: " + fne.getMessage());
+
+		    } finally {
+		        if (out != null) {
+		            out.close();
+		        }
+		        if (filecontent != null) {
+		            filecontent.close();
+		        }
+		        if (writer != null) {
+		            writer.close();
+		        }
+		    }
+		    
+		    try {
+				Connection con = ConnectionProvider.getcon();
+				PreparedStatement ps = con.prepareStatement("INSERT INTO products(id,title,pro_description,location,artist_Id) Values(?,?,?,?,?)");
+		        ps.setInt(1, id);
+		        ps.setString(2, title);
+		        ps.setString(3, description);
+		        ps.setString(4, fileName );
+		        ps.setString(5, mail);
+		        ps.executeUpdate();
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+	
+	}
+
+	
+		private String getExtention(final Part part) {
+		    final String partHeader = part.getHeader("content-disposition");
+		    
+		    for (String content : partHeader.split(";")) {
+		        if (content.trim().startsWith("filename")) {
+		            return content.substring(
+		                    content.indexOf('.') + 1).trim().replace("\"", "");
+		        }
+		    }
+		    return null;
+		}
+		
+		
+}
